@@ -1,4 +1,5 @@
-from functions import get_todos, write_todos
+# from functions import get_todos, write_todos
+import functions
 import time
 
 
@@ -12,14 +13,14 @@ while True:
     if user_action.startswith('add'):
         todo = user_action[4:]
 
-        todos = get_todos()
+        todos = functions.get_todos()
 
         todos.append(todo + "\n")
 
-        write_todos(todos)
+        functions.write_todos(todos)
     
     elif user_action.startswith('show'):
-        todos = get_todos()
+        todos = functions.get_todos()
 
         # new_todos = [item.strip('\n') for item in todos]
 
@@ -29,26 +30,26 @@ while True:
     elif user_action.startswith('edit'):
         try:
             todo = user_action[5:]
-            todos = get_todos()
+            todos = functions.get_todos()
 
             number = int(user_action[5:])
             new_todo = input("Enter new todo: ") + "\n"
             todos[number - 1] = new_todo
 
-            write_todos(todos)
+            functions.write_todos(todos)
         except ValueError:
             print("Your command is invalid.")
             continue
 
     elif user_action.startswith('complete'):
         try:
-            todos = get_todos()
+            todos = functions.get_todos()
 
             number = int(user_action[9:])
             number = number - 1
             removed = todos.pop(number).strip('\n')
 
-            write_todos(todos)
+            functions.write_todos(todos)
 
             print(f"Todo {removed} was removed from the list")
         except IndexError:
